@@ -1,9 +1,21 @@
 @import './normalize.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+}
+
+input {
+  outline: none;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: inherit;
+  border: none;
 }
