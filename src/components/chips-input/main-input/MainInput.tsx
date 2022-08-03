@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Value } from 'sass';
 import { IChip } from '../../../types';
 import { checkOpenQuotationMark } from '../../../utilst/checkOpenQuotationMark';
 import { uniqId } from '../../../utilst/uniqId';
@@ -17,7 +16,7 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
 
 
     const addValueToChips = (chip: string) => {
-        setChips(prevChips => ([...prevChips, { chip, id: uniqId() }]))
+        setChips(prevChips => ([...prevChips, { chip, id: uniqId(), isSelected: false }]))
         setValueInput('')
     }
 
@@ -62,7 +61,6 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
     }
 
     return (
-
         <input type="text"
             className='MainInput'
             value={valueInput}
@@ -70,7 +68,6 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             placeholder='Введите ключевые слова' />
-
     )
 }
 

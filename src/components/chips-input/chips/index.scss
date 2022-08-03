@@ -34,4 +34,8 @@
         padding: 0;
         height: 100%;
     }
+
+    &__selected {
+        background-color: $color500;
+    }
 }

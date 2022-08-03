@@ -4,10 +4,13 @@ import { ReactComponent as CrossSvg } from '../../../icons/cross.svg'
 interface Props {
     chip: string;
     removeItem: () => void
+    handleSetSelcted: () => void
+    handleSetUnselcted: () => void
     handleReplaceChip: (modifyedString: string) => void
+    isSelected: boolean
 }
 
-const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip }) => {
+const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip, handleSetSelcted,handleSetUnselcted, isSelected }) => {
     const [isShowInput, setIsShowInput] = useState<boolean>(false)
     const [focus, setFocus] = useState<boolean>(false)
     const [value, setValue] = useState<string>(chip)
@@ -28,7 +31,14 @@ const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip }) => 
         }
     }, [value]);
 
-    const handleShowInput = () => { setIsShowInput(true) }
+    const handleShowInput = (event: React.MouseEvent<HTMLLIElement>) => {
+        if (event.buttons === 1) {
+            handleSetSelcted()
+        } else {
+            handleSetUnselcted()
+            setIsShowInput(true)
+        }
+    }
     const handleHideInput = () => { if (!focus) setIsShowInput(false) }
     const handleSetFocus = () => { setFocus(true) }
     const handleBlur = () => {
@@ -43,9 +53,11 @@ const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip }) => 
         visibility: 'hidden'
     }
 
+    const className = `ChipsItem ${isSelected ? 'ChipsItem__selected' : ''}`
+
     return (
         <li
-            className='ChipsItem'
+            className={className}
             onMouseOver={handleShowInput}
             onMouseOut={handleHideInput}
         >

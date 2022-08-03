@@ -8,6 +8,7 @@ export const createChipsFromString = (value: string): IChip[] => {
     .map((chip) => ({
       chip,
       id: uniqId(),
+      isSelected: false
     }))
   return splitArr
 }

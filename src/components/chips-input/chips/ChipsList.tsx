@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IChip } from '../../../types';
 import { createChipsFromString } from '../../../utilst/createChipsFromString';
 import ChipsItem from './ChipsItem';
@@ -10,6 +10,20 @@ interface Props {
 }
 
 const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
+
+    useEffect(() => {
+        const handleRemoveSelected = (event: KeyboardEvent) => {
+            const isDelete = event.key === "Backspace" || event.key === "Delete"
+            if (!isDelete) return
+            setChips(prevChips => prevChips.filter(({ isSelected }) => !isSelected))
+        }
+        document.addEventListener('keydown', handleRemoveSelected)
+
+        return () => {
+            document.removeEventListener('keydown', handleRemoveSelected)
+        }
+    }, [])
+
     if (!chips.length) {
         return null
     }
@@ -19,7 +33,7 @@ const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
         setChips(newChips)
     }
 
-    const handleReplaceChip = (id: number)  => (modifyedString:string) => {
+    const handleReplaceChip = (id: number) => (modifyedString: string) => {
         if (!modifyedString) {
             handleRemoveItem(id)
             return
@@ -32,7 +46,7 @@ const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
             const indexModifyedChip = chips.findIndex(chip => chip.id === id)
 
             modifyedChips = [...chips]
-            modifyedChips.splice(indexModifyedChip, 1, ...newChips) 
+            modifyedChips.splice(indexModifyedChip, 1, ...newChips)
 
         } else {
             modifyedChips = chips.map(chip => {
@@ -45,12 +59,39 @@ const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
         setChips(modifyedChips)
     }
 
+    const isChipSelected = (id: number): boolean => Boolean(chips.filter(chip => chip.id === id && chip.isSelected))
+
+    const handleSetSelcted = (id: number) => () => {
+        if (!isChipSelected(id)) return
+
+        setChips(chips.map(chip => {
+            if (id === chip.id) {
+                chip.isSelected = true
+            }
+            return chip
+        }))
+    }
+    const handleSetUnselcted = (id: number) => () => {
+        if (isChipSelected(id)) return
+
+        setChips(chips.map(chip => {
+            if (id === chip.id) {
+                chip.isSelected = false
+            }
+            return chip
+        }))
+    }
+
     return (
         <ul className='ChipsList'>
-            {chips.map(({ chip, id }) => <ChipsItem key={id}
+            {chips.map(({ chip, id, isSelected }) => <ChipsItem key={id}
                 chip={chip}
                 handleReplaceChip={handleReplaceChip(id)}
-                removeItem={() => handleRemoveItem(id)} />)}
+                removeItem={() => handleRemoveItem(id)}
+                handleSetSelcted={handleSetSelcted(id)}
+                handleSetUnselcted={handleSetUnselcted(id)}
+                isSelected={isSelected}
+            />)}
         </ul>
     )
 }
