@@ -1,0 +1,31 @@
+@import '../../../styles/theme.scss';
+
+.ChipsList {
+    display: flex;
+}
+
+.ChipsItem {
+    display: flex;
+    padding: 4px 6px;
+
+    height: 100%;
+    margin-right: 8px;
+
+    background-color: $color300;
+    border-radius: 4px;
+
+    color: $color900;
+
+    &_btn {
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+
+        padding-right: 4px;
+
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    }
+}
