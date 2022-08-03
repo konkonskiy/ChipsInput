@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Value } from 'sass';
 import { IChip } from '../../../types';
 import { checkOpenQuotationMark } from '../../../utilst/checkOpenQuotationMark';
 import { uniqId } from '../../../utilst/uniqId';
@@ -20,7 +21,21 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
         setValueInput('')
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        const isDelete = event.key === "Backspace" || event.key === "Delete"
+        
+        if (valueInput || !isDelete) return
+
+        setChips(prevChips => { 
+            const newChips = [...prevChips]
+            newChips.pop()
+            return newChips
+        })
+
+    }
+
     const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+
         const { value } = event.target;
 
         const lastLetter = value[value.length - 1]
@@ -53,6 +68,7 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
             value={valueInput}
             onChange={handleChangeInput}
             onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
             placeholder='Введите ключевые слова' />
 
     )
