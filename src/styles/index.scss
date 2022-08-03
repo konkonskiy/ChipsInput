@@ -13,10 +13,16 @@ body {
 
 input {
   outline: none;
-  font-size: inherit;
-  font-weight: inherit;
+  font: inherit; 
+  color: inherit;
+  letter-spacing: inherit;
   background-color: inherit;
   border: none;
+}
+
+button {
+  padding: 0;
+  align-items: center;
 }
 
 ul {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { IChip } from '../../types';
-import { uniqId } from '../../utilst/uniqId';
 import ErrorMessage from '../error-message/ErrorMessage';
 import ChipsList from './chips/ChipsList';
 import MainInput from './main-input/MainInput';
 import './index.scss'
+import { createChipsFromString } from '../../utilst/createChipsFromString';
 
 interface Props {
     value: string;
@@ -23,10 +23,7 @@ const ChipsInput: React.FC<Props> = ({ setValue, value }) => {
 
     useEffect(() => {
         if (!value) return
-        const splitArr = value.split(',').map(chip => ({
-            chip,
-            id: uniqId()
-        }))
+        const splitArr = createChipsFromString(value)
         setChips(splitArr)
     }, [])
 

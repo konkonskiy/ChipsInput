@@ -4,7 +4,7 @@ import './index.scss'
 import ChipsInput from '../chips-input/ChipsInput';
 
 const App: React.FC = () => {
-  const [value, setValue] = useState<string>('test,tets');
+  const [value, setValue] = useState<string>('test');
 
   return (
     <div className="App">

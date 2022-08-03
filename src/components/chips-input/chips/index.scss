@@ -6,6 +6,7 @@
 
 .ChipsItem {
     display: flex;
+    align-items: center;
     padding: 4px 6px;
 
     height: 100%;
@@ -21,11 +22,16 @@
         background-color: inherit;
         cursor: pointer;
 
-        padding-right: 4px;
+        padding-left: 8px;
 
         svg {
             width: 10px;
             height: 10px;
         }
+    }
+
+    &_input, text {
+        padding: 0;
+        height: 100%;
     }
 }

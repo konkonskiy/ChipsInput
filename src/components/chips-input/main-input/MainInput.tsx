@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IChip } from '../../../types';
+import { checkOpenQuotationMark } from '../../../utilst/checkOpenQuotationMark';
 import { uniqId } from '../../../utilst/uniqId';
 import './index.scss'
 
@@ -24,9 +25,7 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
 
         const lastLetter = value[value.length - 1]
 
-        if (lastLetter === '"') {
-            setIsOpenQuotationMark(!isOpenQuotationMark)
-        }
+        setIsOpenQuotationMark(checkOpenQuotationMark(value))
 
         if (value === ',') return
 
@@ -50,7 +49,7 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
     return (
 
         <input type="text"
-            className='MainInput_input'
+            className='MainInput'
             value={valueInput}
             onChange={handleChangeInput}
             onBlur={handleBlur}
