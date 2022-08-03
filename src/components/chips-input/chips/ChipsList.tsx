@@ -20,6 +20,11 @@ const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
     }
 
     const handleReplaceChip = (id: number)  => (modifyedString:string) => {
+        if (!modifyedString) {
+            handleRemoveItem(id)
+            return
+        }
+
         let modifyedChips = []
         if (modifyedString.includes(",")) {
             const newChips = createChipsFromString(modifyedString)
