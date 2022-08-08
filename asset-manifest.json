@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/chips-input/static/css/main.4074e9fc.css",
+    "main.js": "/chips-input/static/js/main.53b2d6e3.js",
+    "static/media/cross.svg": "/chips-input/static/media/cross.f17f4ccea6195dfccf1e66b22f5d0afa.svg",
+    "index.html": "/chips-input/index.html",
+    "main.4074e9fc.css.map": "/chips-input/static/css/main.4074e9fc.css.map",
+    "main.53b2d6e3.js.map": "/chips-input/static/js/main.53b2d6e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4074e9fc.css",
+    "static/js/main.53b2d6e3.js"
+  ]
+}
