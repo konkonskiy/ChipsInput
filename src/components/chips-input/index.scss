@@ -8,12 +8,14 @@
         padding: 8px 12px;
 
         height: 40px;
-        max-width: 800px;
+        width: 100%;
 
         background-color: $color200;
         border-radius: 8px;
 
         color: $color800;
         font-weight: 500;
+
+        /* TODO MAKE OVERFLOW */
     }
 }

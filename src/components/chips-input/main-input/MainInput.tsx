@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IChip } from '../../../types';
 import { checkOpenQuotationMark } from '../../../utilst/checkOpenQuotationMark';
-import { uniqId } from '../../../utilst/uniqId';
+import { createChipsFromString } from '../../../utilst/createChipsFromString';
 import './index.scss'
 
 interface Props {
@@ -16,7 +16,7 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
 
 
     const addValueToChips = (chip: string) => {
-        setChips(prevChips => ([...prevChips, { chip, id: uniqId(), isSelected: false }]))
+        setChips(prevChips => ([...prevChips, ...createChipsFromString(chip)]))
         setValueInput('')
     }
 
@@ -37,11 +37,11 @@ const MainInput: React.FC<Props> = ({ setChips, setShowErrorMessage }) => {
 
         const { value } = event.target;
 
+        if (value === ',') return
+
         const lastLetter = value[value.length - 1]
 
         setIsOpenQuotationMark(checkOpenQuotationMark(value))
-
-        if (value === ',') return
 
         if (lastLetter === ',' && !isOpenQuotationMark) {
             const chipsString = value.substring(0, value.length - 1)

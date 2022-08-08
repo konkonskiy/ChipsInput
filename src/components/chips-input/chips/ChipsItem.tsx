@@ -10,7 +10,14 @@ interface Props {
     isSelected: boolean
 }
 
-const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip, handleSetSelcted,handleSetUnselcted, isSelected }) => {
+const ChipsItem: React.FC<Props> = ({
+    chip,
+    removeItem,
+    handleReplaceChip,
+    handleSetSelcted,
+    handleSetUnselcted,
+    isSelected
+}) => {
     const [isShowInput, setIsShowInput] = useState<boolean>(false)
     const [focus, setFocus] = useState<boolean>(false)
     const [value, setValue] = useState<string>(chip)
@@ -19,7 +26,7 @@ const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip, handl
     const span: React.LegacyRef<HTMLSpanElement> = useRef(null);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // TODO сделать ошибку на кол-во символов
+        // TODO сделать ограничение на кол-во символов
         setValue(event.target.value)
     }
 
@@ -41,6 +48,7 @@ const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip, handl
     }
     const handleHideInput = () => { if (!focus) setIsShowInput(false) }
     const handleSetFocus = () => { setFocus(true) }
+
     const handleBlur = () => {
         setFocus(false)
         setIsShowInput(false)
@@ -79,7 +87,11 @@ const ChipsItem: React.FC<Props> = ({ chip, removeItem, handleReplaceChip, handl
             >
                 {value}
             </span>
-            <button type="button" className='ChipsItem_btn' onClick={removeItem}>
+            <button
+                type="button"
+                className='ChipsItem_btn'
+                onClick={removeItem}
+            >
                 <CrossSvg />
             </button>
         </li >

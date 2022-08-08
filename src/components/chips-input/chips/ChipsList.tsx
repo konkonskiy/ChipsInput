@@ -10,20 +10,20 @@ interface Props {
 }
 
 const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
-
     useEffect(() => {
         const handleRemoveSelected = (event: KeyboardEvent) => {
             const isDelete = event.key === "Backspace" || event.key === "Delete"
             if (!isDelete) return
             setChips(prevChips => prevChips.filter(({ isSelected }) => !isSelected))
         }
+
         document.addEventListener('keydown', handleRemoveSelected)
 
         return () => {
             document.removeEventListener('keydown', handleRemoveSelected)
         }
     }, [])
-
+    
     if (!chips.length) {
         return null
     }
@@ -59,7 +59,8 @@ const ChipsList: React.FC<Props> = ({ chips, setChips }) => {
         setChips(modifyedChips)
     }
 
-    const isChipSelected = (id: number): boolean => Boolean(chips.filter(chip => chip.id === id && chip.isSelected))
+    const isChipSelected = (id: number): boolean =>
+        Boolean(chips.filter(chip => chip.id === id && chip.isSelected))
 
     const handleSetSelcted = (id: number) => () => {
         if (!isChipSelected(id)) return

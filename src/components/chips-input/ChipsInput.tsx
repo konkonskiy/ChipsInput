@@ -3,8 +3,8 @@ import { IChip } from '../../types';
 import ErrorMessage from '../error-message/ErrorMessage';
 import ChipsList from './chips/ChipsList';
 import MainInput from './main-input/MainInput';
-import './index.scss'
 import { createChipsFromString } from '../../utilst/createChipsFromString';
+import './index.scss'
 
 interface Props {
     value: string;
